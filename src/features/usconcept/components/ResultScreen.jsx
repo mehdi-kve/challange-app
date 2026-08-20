@@ -201,6 +201,17 @@ export function ResultScreen({ answers, onClose }) {
                 <ChevronLeft className="size-5" strokeWidth={2.2} />
               </button>
             </div>
+
+            <p
+              className="animate-line-in pt-4 text-[11px] font-bold"
+              style={{ color: "var(--muted)" }}
+            >
+              ساخته شده با{" "}
+              <span className="emoji" aria-hidden>
+                ❤️
+              </span>{" "}
+              توسط m3hdi.kve
+            </p>
           </>
         )}
       </div>
