@@ -30,7 +30,6 @@ function reducer(state, action) {
       const next = index + 1;
       const currentLevel = questions[index].level;
       const nextLevel = questions[next].level;
-      const toast = questions[index].id === "q19" ? "خب... اینا رو یادم می‌مونه. 👀" : null;
       if (nextLevel > currentLevel) {
         return {
           ...state,
@@ -38,10 +37,10 @@ function reducer(state, action) {
           transitionLevel: nextLevel,
           pendingIndex: next,
           direction: 1,
-          toast,
+          toast: null,
         };
       }
-      return { ...state, index: next, direction: 1, toast };
+      return { ...state, index: next, direction: 1, toast: null };
     }
     case "BACK": {
       if (state.index === 0) return { ...initialState };

@@ -5,23 +5,28 @@ import { questions } from "../data/questions";
 import { buildPayload } from "../utils/payload";
 
 const REVEALS = [
-  { at: 0, node: <p className="text-6xl font-black tracking-tight">تمام شد.</p> },
-  { at: 700, node: <p className="text-sm font-semibold">خب...</p> },
   {
-    at: 1500,
+    at: 0,
     node: (
-      <p className="text-lg font-black leading-10">
-        حالا یه راهنمای کوچیک دارم
-        <br />
-        برای اینکه بهتر بفهممت. <span>❤️</span>
+      <p className="text-6xl font-black tracking-tight">خب سوالات تموم شد</p>
+    ),
+  },
+  {
+    at: 700,
+    node: (
+      <p className="text-sm font-semibold">
+        خسته نباشی{" "}
+        <span className="emoji" aria-hidden>
+          ☺
+        </span>
       </p>
     ),
   },
   {
-    at: 2600,
+    at: 1500,
     node: (
-      <p className="text-sm font-semibold" style={{ color: "var(--muted)" }}>
-        ممنون که جواب دادی.
+      <p className="text-lg font-black leading-10">
+        مرسی ازت که جواب دادی. <span>🥺❤️</span>
       </p>
     ),
   },
@@ -38,13 +43,21 @@ export function ResultScreen({ answers, onClose }) {
   const timers = useRef([]);
 
   useEffect(() => {
-    timers.current = REVEALS.map((item, index) => setTimeout(() => setShown((count) => Math.max(count, index + 1)), item.at));
+    timers.current = REVEALS.map((item, index) =>
+      setTimeout(
+        () => setShown((count) => Math.max(count, index + 1)),
+        item.at,
+      ),
+    );
     timers.current.push(setTimeout(() => setEpilogue(true), EPILOGUE_AT));
     timers.current.push(setTimeout(() => setReady(true), QR_AT));
     return () => timers.current.forEach(clearTimeout);
   }, []);
 
-  const payload = useMemo(() => buildPayload(answers ?? {}, questions), [answers]);
+  const payload = useMemo(
+    () => buildPayload(answers ?? {}, questions),
+    [answers],
+  );
   const payloadJson = useMemo(() => JSON.stringify(payload), [payload]);
 
   useEffect(() => {
@@ -72,9 +85,15 @@ export function ResultScreen({ answers, onClose }) {
     if (!qr) return;
     try {
       const blob = await (await fetch(qr)).blob();
-      const file = new File([blob], "project-us-answers.png", { type: "image/png" });
+      const file = new File([blob], "project-us-answers.png", {
+        type: "image/png",
+      });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: "پاسخ‌های Project UsConcept", text: payloadJson });
+        await navigator.share({
+          files: [file],
+          title: "پاسخ‌های Project UsConcept",
+          text: payloadJson,
+        });
         return;
       }
     } catch (error) {
@@ -87,7 +106,11 @@ export function ResultScreen({ answers, onClose }) {
     <div className="flex min-h-full flex-1 flex-col items-center justify-center text-center">
       <div className="flex min-h-72 flex-col items-center gap-4">
         {REVEALS.slice(0, shown).map((item) => (
-          <div key={item.at} className="animate-line-in" style={{ color: "var(--ink)" }}>
+          <div
+            key={item.at}
+            className="animate-line-in"
+            style={{ color: "var(--ink)" }}
+          >
             {item.node}
           </div>
         ))}
@@ -107,13 +130,23 @@ export function ResultScreen({ answers, onClose }) {
           <>
             <div className="animate-line-in rounded-3xl bg-white p-4 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)]">
               {qr ? (
-                <img src={qr} alt="QR کد پاسخ‌ها" className="h-52 w-52 rounded-2xl" />
+                <img
+                  src={qr}
+                  alt="QR کد پاسخ‌ها"
+                  className="h-52 w-52 rounded-2xl"
+                />
               ) : (
-                <div className="h-52 w-52 animate-pulse-slow rounded-2xl" style={{ backgroundColor: "rgba(255,255,255,0.55)" }} />
+                <div
+                  className="h-52 w-52 animate-pulse-slow rounded-2xl"
+                  style={{ backgroundColor: "rgba(255,255,255,0.55)" }}
+                />
               )}
             </div>
 
-            <p className="animate-line-in max-w-xs text-xs font-semibold leading-6" style={{ color: "var(--muted)" }}>
+            <p
+              className="animate-line-in max-w-xs text-xs font-semibold leading-6"
+              style={{ color: "var(--muted)" }}
+            >
               این QR جواب‌های تو رو داره؛ اسکنش کن تا جواب‌ها رو ببینی.
             </p>
 
@@ -124,7 +157,8 @@ export function ResultScreen({ answers, onClose }) {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
                 style={{
                   color: "var(--base)",
-                  background: "linear-gradient(to left, var(--accent), var(--accent-2))",
+                  background:
+                    "linear-gradient(to left, var(--accent), var(--accent-2))",
                   boxShadow: "0 18px 40px -18px var(--ring)",
                 }}
               >
@@ -134,7 +168,11 @@ export function ResultScreen({ answers, onClose }) {
                 type="button"
                 onClick={download}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-6 py-3.5 text-sm font-black transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
-                style={{ borderColor: "var(--card-border)", color: "var(--ink)", backgroundColor: "var(--card)" }}
+                style={{
+                  borderColor: "var(--card-border)",
+                  color: "var(--ink)",
+                  backgroundColor: "var(--card)",
+                }}
               >
                 دانلود QR
               </button>
