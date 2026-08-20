@@ -19,8 +19,7 @@
     position: absolute;
     border-radius: 9999px;
     opacity: 0.45;
-    filter: blur(90px);
-    transition: background-color 1200ms var(--ease-out);
+    pointer-events: none;
   }
 
   .range-input {

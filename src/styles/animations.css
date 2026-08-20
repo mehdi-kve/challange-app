@@ -1,36 +1,32 @@
 @theme {
-  --animate-step-in: step-in 480ms var(--ease-out) both;
-  --animate-step-in-back: step-in-back 480ms var(--ease-out) both;
-  --animate-fade-in: fade-in 500ms ease both;
-  --animate-rise: rise 500ms var(--ease-out) both;
+  --animate-step-in: step-in 420ms var(--ease-out) both;
+  --animate-step-in-back: step-in-back 420ms var(--ease-out) both;
+  --animate-fade-in: fade-in 400ms ease both;
+  --animate-rise: rise 420ms var(--ease-out) both;
   --animate-shake: shake 380ms var(--ease-out);
   --animate-pulse-slow: pulse-slow 3.2s ease-in-out infinite;
-  --animate-emoji-pop: emoji-pop 420ms var(--ease-out);
-  --animate-line-in: line-in 520ms var(--ease-out) both;
+  --animate-emoji-pop: emoji-pop 360ms var(--ease-out);
+  --animate-line-in: line-in 400ms var(--ease-out) both;
 
   @keyframes step-in {
     from {
       opacity: 0;
-      transform: translateY(20px) scale(0.985);
-      filter: blur(4px);
+      transform: translateY(18px) scale(0.985);
     }
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
-      filter: blur(0);
     }
   }
 
   @keyframes step-in-back {
     from {
       opacity: 0;
-      transform: translateY(-16px) scale(0.99);
-      filter: blur(4px);
+      transform: translateY(-14px) scale(0.99);
     }
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
-      filter: blur(0);
     }
   }
 
@@ -46,7 +42,7 @@
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -95,13 +91,11 @@
   @keyframes line-in {
     from {
       opacity: 0;
-      transform: translateY(14px);
-      filter: blur(3px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
 }

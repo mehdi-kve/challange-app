@@ -27,7 +27,7 @@ export function Background({ theme }) {
               bottom: pos.bottom,
               left: pos.left,
               opacity,
-              backgroundColor: color,
+              background: `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 68%)`,
             }}
           />
         );
