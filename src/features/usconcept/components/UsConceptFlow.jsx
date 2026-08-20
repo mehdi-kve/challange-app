@@ -3,6 +3,7 @@ import { AppShell } from "../../../components/layout/AppShell";
 import { LANDING_THEME, RESULT_THEME, LEVELS } from "../data/levels";
 import { questions } from "../data/questions";
 import { useFlow } from "../hooks/useFlow";
+import { useReviewFlow } from "../hooks/useReviewFlow";
 import { LandingScreen } from "./LandingScreen";
 import { TransitionScreen } from "./TransitionScreen";
 import { QuestionScreen } from "./QuestionScreen";
@@ -30,8 +31,10 @@ function Toast({ message, onDismiss }) {
   );
 }
 
-export function UsConceptFlow() {
-  const flow = useFlow();
+export function UsConceptFlow({ reviewPayload }) {
+  const normalFlow = useFlow();
+  const reviewFlow = useReviewFlow(reviewPayload);
+  const flow = reviewPayload ? reviewFlow : normalFlow;
   const { phase, handleHideToast } = flow;
 
   useEffect(() => {
@@ -39,6 +42,29 @@ export function UsConceptFlow() {
     const timer = setTimeout(() => handleHideToast(), TOAST_HIDE_MS);
     return () => clearTimeout(timer);
   }, [flow.toast, handleHideToast]);
+
+  if (reviewPayload) {
+    return (
+      <AppShell theme={flow.level?.theme ?? LANDING_THEME}>
+        {flow.phase === "review" && (
+          <QuestionScreen
+            mode="review"
+            question={flow.question}
+            index={flow.index}
+            total={questions.length}
+            level={flow.level}
+            direction={flow.direction}
+            answer={flow.answer}
+            onAnswer={() => {}}
+            onNext={flow.next}
+            onBack={flow.back}
+            isFirst={flow.isFirst}
+            onClose={flow.close}
+          />
+        )}
+      </AppShell>
+    );
+  }
 
   const theme = (() => {
     if (phase === "landing") return LANDING_THEME;
@@ -74,7 +100,7 @@ export function UsConceptFlow() {
         />
       )}
 
-      {phase === "result" && <ResultScreen onClose={flow.handleClose} />}
+      {phase === "result" && <ResultScreen answers={flow.answers} onClose={flow.handleClose} />}
 
       {flow.toast && <Toast message={flow.toast} onDismiss={handleHideToast} />}
     </AppShell>

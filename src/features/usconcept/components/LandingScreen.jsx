@@ -55,6 +55,14 @@ export function LandingScreen({ onStart }) {
           شروع می‌کنم
           <ChevronLeft className="size-5" />
         </button>
+
+        <a
+          href="#/scan"
+          className="mt-5 inline-flex items-center justify-center gap-1.5 text-[11px] font-bold transition-colors duration-300 hover:opacity-80"
+          style={{ color: "var(--muted)" }}
+        >
+          می‌خوای پاسخ‌ها رو با QR ببینی؟ اسکن کن
+        </a>
       </div>
     </div>
   );

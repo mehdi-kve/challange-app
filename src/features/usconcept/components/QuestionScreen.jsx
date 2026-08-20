@@ -18,8 +18,9 @@ const renderers = {
   palette: PalettePicker,
 };
 
-export function QuestionScreen({ question, index, total, level, direction, answer, onAnswer, onNext, onBack, isFirst }) {
+export function QuestionScreen({ question, index, total, level, direction, answer, onAnswer, onNext, onBack, isFirst, mode = "answer", onClose }) {
   const Renderer = renderers[question.type] ?? OptionList;
+  const isReview = mode === "review";
 
   const canContinue = isAnswerValid(question, answer);
   const showProgress = true;
@@ -89,6 +90,14 @@ export function QuestionScreen({ question, index, total, level, direction, answe
               >
                 {question.label ?? `سؤال ${fa(index + 1)}`}
               </span>
+              {isReview && (
+                <span
+                  className="mr-2 inline-flex items-center rounded-full border px-3.5 py-1 text-[11px] font-black"
+                  style={{ borderColor: "var(--card-border)", color: "var(--muted)" }}
+                >
+                  حالت مشاهده
+                </span>
+              )}
             </div>
 
             <h1 className="text-[1.4rem] font-black leading-9 sm:text-2xl sm:leading-10" style={{ color: "var(--ink)" }}>
@@ -102,13 +111,56 @@ export function QuestionScreen({ question, index, total, level, direction, answe
           </div>
 
           <div className="mt-8 flex-1">
-            <Renderer question={question} value={answer} onChange={onAnswer} />
+            <Renderer question={question} value={answer} onChange={onAnswer} disabled={isReview} />
           </div>
         </div>
       </main>
 
       <footer className="sticky bottom-0 z-10 flex flex-col items-stretch gap-3 pt-8 pb-5">
-        {isLast ? (
+        {isReview ? (
+          <>
+            {!isLast ? (
+              <button
+                type="button"
+                onClick={onNext}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-base font-black transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                style={{
+                  color: "var(--base)",
+                  background: "linear-gradient(to left, var(--accent), var(--accent-2))",
+                  boxShadow: "0 18px 40px -18px var(--ring)",
+                }}
+              >
+                سؤال بعدی
+                <ChevronLeft className="size-5" strokeWidth={2.4} />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={onClose}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-base font-black transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
+                style={{
+                  color: "var(--base)",
+                  backgroundColor: "var(--accent)",
+                  boxShadow: "0 18px 40px -18px var(--ring)",
+                }}
+              >
+                <span className="emoji" aria-hidden>
+                  🥺
+                </span>
+                تمام
+                <ChevronLeft className="size-5" strokeWidth={2.4} />
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-center text-[11px] font-bold transition-colors duration-300 hover:opacity-80"
+              style={{ color: "var(--muted)" }}
+            >
+              خروج از حالت مشاهده
+            </button>
+          </>
+        ) : isLast ? (
           <button
             type="button"
             onClick={onNext}
