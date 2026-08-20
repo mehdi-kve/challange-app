@@ -98,20 +98,6 @@ export const questions = [
     ],
   },
   {
-    id: "q12",
-    level: 3,
-    type: "single",
-    advance: "confirm",
-    title: "اگه بخوای فقط یه چیز رو درباره من تغییر بدی یا بهترش کنی، چی رو انتخاب می‌کنی؟ 👀",
-    options: [
-      { id: "talk-more", label: "بیشتر حرف بزنم", emoji: "💬" },
-      { id: "show-feelings", label: "بیشتر احساساتم رو نشون بدم", emoji: "❤️" },
-      { id: "more-attention", label: "بیشتر پیگیر باشم", emoji: "📱" },
-      { id: "less-serious", label: "کمتر بعضی چیزها رو جدی بگیرم", emoji: "😌" },
-      { id: "more-mischief", label: "بیشتر شیطنت کنم", emoji: "😂" },
-    ],
-  },
-  {
     id: "q13",
     level: 4,
     type: "single",
