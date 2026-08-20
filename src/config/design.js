@@ -1,0 +1,118 @@
+export const LEVELS = {
+  landing: {
+    key: "landing",
+    base: "#171310",
+    blobs: ["#8a5a2b", "#7a3f32", "#5f544a"],
+    blobOpacity: 0.32,
+    accent: "#e8c39a",
+    accent2: "#d9a06b",
+    cardRound: "1.5rem",
+    titleSize: "1.875rem",
+    titleLeading: "1.35",
+    calm: true,
+    heart: false,
+    gradient: 0,
+  },
+  1: {
+    key: "level1",
+    base: "#1a1410",
+    blobs: ["#e2725b", "#e0a03c", "#4aa3a0"],
+    blobOpacity: 0.4,
+    accent: "#f0b45a",
+    accent2: "#ef7d5f",
+    cardRound: "1.25rem",
+    titleSize: "1.5rem",
+    titleLeading: "1.5",
+    calm: false,
+    heart: false,
+    gradient: 0,
+  },
+  2: {
+    key: "level2",
+    base: "#12151d",
+    blobs: ["#33475f", "#2b5570", "#3d3567"],
+    blobOpacity: 0.45,
+    accent: "#7fa6c9",
+    accent2: "#6f87c4",
+    cardRound: "1.25rem",
+    titleSize: "1.5rem",
+    titleLeading: "1.5",
+    calm: true,
+    heart: false,
+    gradient: 0,
+  },
+  3: {
+    key: "level3",
+    base: "#1d1312",
+    blobs: ["#a8543f", "#c25e53", "#7f4a7a"],
+    blobOpacity: 0.42,
+    accent: "#e89a84",
+    accent2: "#d98b9a",
+    cardRound: "1.75rem",
+    titleSize: "1.75rem",
+    titleLeading: "1.45",
+    calm: true,
+    heart: false,
+    gradient: 18,
+  },
+  4: {
+    key: "level4",
+    base: "#170e10",
+    blobs: ["#b03a4b", "#8f2e45", "#c0506a"],
+    blobOpacity: 0.4,
+    accent: "#ef7f94",
+    accent2: "#f0a08a",
+    cardRound: "1.5rem",
+    titleSize: "1.75rem",
+    titleLeading: "1.45",
+    calm: true,
+    heart: true,
+    gradient: 22,
+  },
+  5: {
+    key: "level5",
+    base: "#151210",
+    blobs: ["#6b4a35", "#8a5a3b", "#4f4a40"],
+    blobOpacity: 0.28,
+    accent: "#e8c39a",
+    accent2: "#d9a06b",
+    cardRound: "1.25rem",
+    titleSize: "1.625rem",
+    titleLeading: "1.5",
+    calm: true,
+    heart: true,
+    gradient: 12,
+  },
+  result: {
+    key: "result",
+    base: "#100e0c",
+    blobs: ["#8a5a2b", "#a04838", "#5f544a"],
+    blobOpacity: 0.26,
+    accent: "#e8c39a",
+    accent2: "#e08a6a",
+    cardRound: "1.5rem",
+    titleSize: "1.875rem",
+    titleLeading: "1.35",
+    calm: true,
+    heart: true,
+    gradient: 8,
+  },
+};
+
+export const LEVEL_META = [
+  { number: 1, key: "level1", name: "Just a game", fa: "فقط یه بازی" },
+  { number: 2, key: "level2", name: "Getting to know you", fa: "داشتن تو رو شناختن" },
+  { number: 3, key: "level3", name: "Between the lines", fa: "بین خط‌ها" },
+  { number: 4, key: "level4", name: "A little more honest", fa: "یه ذره صادق‌تر" },
+  { number: 5, key: "level5", name: "Now you know why", fa: "حالا می‌دونی چرا" },
+];
+
+export const TOTAL_QUESTIONS = 25;
+
+export function levelMetaForQuestion(index) {
+  return LEVEL_META.find((meta) => meta.number === Math.min(5, Math.max(1, Math.floor(index / 5) + 1)));
+}
+
+export function levelMetaByNumber(number) {
+  return LEVEL_META.find((meta) => meta.number === number);
+}

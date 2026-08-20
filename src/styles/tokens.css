@@ -1,0 +1,21 @@
+@theme {
+  --font-sans: "Estedad", "Vazirmatn", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-accent: var(--accent, #38bdf8);
+  --color-accent-2: var(--accent-2, #a78bfa);
+
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  --shadow-card: 0 20px 60px -24px rgb(0 0 0 / 0.55);
+  --shadow-glow: 0 8px 40px -12px var(--accent, #38bdf8);
+
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 700ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

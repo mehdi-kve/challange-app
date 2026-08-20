@@ -1,11 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
+import QuestionnairePage from "./pages/QuestionnairePage";
 
 function App() {
-  return <h1 className="text-2xl font-bold underline">Hello Tailwind!</h1>;
+  return <QuestionnairePage />;
 }
 
 export default App;
